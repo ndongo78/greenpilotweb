@@ -24,13 +24,13 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-xl">
-          <div className="absolute -inset-4 rounded-3xl bg-green-200/40 blur-2xl" aria-hidden="true" />
+          <div className="absolute -inset-4 rounded-3xl bg-gradient-to-b from-green-50 to-white" aria-hidden="true" />
           <Image
-            src="/brand_app.png"
+            src="/logo_header.png"
             alt={`${appTagline} — aperçu de l'application`}
             width={800}
             height={600}
-            className="relative rounded-2xl border border-gray-200 bg-white shadow-2xl shadow-green-900/10"
+            className="relative"
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
           />

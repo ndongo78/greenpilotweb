@@ -70,13 +70,12 @@ export const features: FeatureItem[] = [
 ];
 
 export const audiences = [
+  'Artisans espaces verts',
   'Paysagistes',
   'Jardiniers',
-  'Électriciens',
-  'Plombiers',
-  'Peintres',
   'Auto-entrepreneurs',
-  'Petites entreprises',
+  'Micro-entreprises',
+  'PME du paysage',
 ] as const;
 
 export const screenshots = [

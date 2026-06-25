@@ -9,8 +9,8 @@ export function AudienceSection() {
     <Section id="pour-qui" background="muted">
       <Container>
         <SectionHeading
-          title="Conçu pour les artisans et professionnels du terrain"
-          subtitle="GreenPilot s'adapte à votre métier, que vous soyez seul ou en équipe."
+          title="Conçu pour les artisans des espaces verts"
+          subtitle="GreenPilot accompagne les jardiniers, paysagistes, auto-entrepreneurs, micro-entreprises et PME du paysage."
         />
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
           {audiences.map((audience, index) => (

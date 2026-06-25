@@ -42,6 +42,45 @@ export function Header() {
         <AppButton href="#tarifs" size="sm" className="hidden sm:inline-flex">
           Essayer gratuitement
         </AppButton>
+
+        <details className="group relative md:hidden">
+          <summary
+            aria-label="Ouvrir le menu"
+            className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors hover:border-green-200 hover:bg-green-50 [&::-webkit-details-marker]:hidden"
+          >
+            <span className="flex w-5 flex-col gap-1.5">
+              <span className="h-0.5 rounded-full bg-current transition-transform group-open:translate-y-2 group-open:rotate-45" />
+              <span className="h-0.5 rounded-full bg-current transition-opacity group-open:opacity-0" />
+              <span className="h-0.5 rounded-full bg-current transition-transform group-open:-translate-y-2 group-open:-rotate-45" />
+            </span>
+          </summary>
+
+          <div className="absolute right-0 top-12 w-[min(82vw,20rem)] overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xl shadow-gray-900/10">
+            <div className="flex flex-col py-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-green-50 hover:text-green-700"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#connexion"
+                className="px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-green-50 hover:text-green-700"
+              >
+                Connexion
+              </a>
+              <a
+                href="#tarifs"
+                className="mx-4 my-2 inline-flex justify-center rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 sm:hidden"
+              >
+                Essayer gratuitement
+              </a>
+            </div>
+          </div>
+        </details>
       </Container>
     </header>
   );

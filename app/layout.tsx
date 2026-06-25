@@ -3,8 +3,11 @@ import './globals.css';
 import { appDescription, appName } from '@/src/constants/brand';
 
 export const metadata: Metadata = {
-  title: `${appName} — Gestion de chantiers, clients et interventions`,
+  title: appName,
   description: appDescription,
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: appName,
     description: appDescription,

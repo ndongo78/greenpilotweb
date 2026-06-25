@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Container } from '@/components/common/Container';
 import { Section, SectionHeading } from '@/components/common/Section';
 import { screenshots } from '@/src/constants/landing';
@@ -58,7 +59,18 @@ export function ScreenshotsSection() {
             <figure key={screenshot.title}>
               <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
                 <div className="aspect-[4/3]">
-                  <ScreenshotPlaceholder variant={index} />
+                  {index === 0 ? (
+                    <Image
+                      src="/screens/c2.png"
+                      alt={`${screenshot.title} — aperçu GreenPilot`}
+                      width={1586}
+                      height={992}
+                      className="h-full w-full bg-gray-50 object-contain"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <ScreenshotPlaceholder variant={index} />
+                  )}
                 </div>
               </div>
               <figcaption className="mt-4 text-center">
