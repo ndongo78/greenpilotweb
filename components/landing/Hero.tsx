@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { AppButton } from '@/components/common/AppButton';
 import { Container } from '@/components/common/Container';
-import { appDescription, appTagline } from '@/src/constants/brand';
+import { appDescription, appTagline, registerUrl } from '@/src/constants/brand';
 
 export function Hero() {
   return (
@@ -14,7 +14,7 @@ export function Hero() {
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-gray-600">{appDescription}</p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <AppButton href="#tarifs" size="lg">
+            <AppButton href={registerUrl} size="lg">
               Commencer gratuitement
             </AppButton>
             <AppButton href="#fonctionnalites" variant="secondary" size="lg">

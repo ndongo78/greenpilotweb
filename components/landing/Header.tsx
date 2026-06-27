@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AppButton } from '@/components/common/AppButton';
 import { Container } from '@/components/common/Container';
-import { appName } from '@/src/constants/brand';
+import { appName, registerUrl } from '@/src/constants/brand';
 import { navLinks } from '@/src/constants/landing';
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
           </a>
         </div>
 
-        <AppButton href="#tarifs" size="sm" className="hidden sm:inline-flex">
+        <AppButton href={registerUrl} size="sm" className="hidden sm:inline-flex">
           Essayer gratuitement
         </AppButton>
 
@@ -73,7 +73,7 @@ export function Header() {
                 Connexion
               </a>
               <a
-                href="#tarifs"
+                href={registerUrl}
                 className="mx-4 my-2 inline-flex justify-center rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 sm:hidden"
               >
                 Essayer gratuitement

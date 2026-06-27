@@ -1,6 +1,7 @@
 import { AppButton } from '@/components/common/AppButton';
 import { Container } from '@/components/common/Container';
 import { Section, SectionHeading } from '@/components/common/Section';
+import { registerUrl } from '@/src/constants/brand';
 import { pricingPlans } from '@/src/constants/landing';
 
 export function PricingSection() {
@@ -33,7 +34,7 @@ export function PricingSection() {
                 <span className="text-gray-500">{plan.period}</span>
               </div>
               <ul className="mt-8 flex-1 space-y-3">
-                {plan.features.map((feature) => (
+                {plan.includedFeatures.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-gray-700">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +50,29 @@ export function PricingSection() {
                     {feature}
                   </li>
                 ))}
+                {plan.excludedFeatures.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-gray-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-gray-400"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
               </ul>
+              <p className="mt-6 rounded-lg bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700">
+                {plan.footnote}
+              </p>
               <AppButton
-                href="#connexion"
+                href={registerUrl}
                 variant={plan.recommended ? 'primary' : 'secondary'}
                 className="mt-8 w-full"
               >

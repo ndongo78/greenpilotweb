@@ -3,6 +3,13 @@ import { Container } from '@/components/common/Container';
 import { Section, SectionHeading } from '@/components/common/Section';
 import { screenshots } from '@/src/constants/landing';
 
+const screenshotImages: Record<number, string> = {
+  0: '/screens/c2.png',
+  1: '/screens/c4.png',
+  2: '/screens/c5.png',
+  3: '/screens/c3.png',
+};
+
 function ScreenshotPlaceholder({ variant }: { variant: number }) {
   const variants = [
     { bars: [60, 40, 80], rows: 3 },
@@ -59,9 +66,9 @@ export function ScreenshotsSection() {
             <figure key={screenshot.title}>
               <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
                 <div className="aspect-[4/3]">
-                  {index === 0 ? (
+                  {screenshotImages[index] ? (
                     <Image
-                      src="/screens/c2.png"
+                      src={screenshotImages[index]}
                       alt={`${screenshot.title} — aperçu GreenPilot`}
                       width={1586}
                       height={992}
