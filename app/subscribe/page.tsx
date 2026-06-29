@@ -8,6 +8,7 @@ type SubscribePageProps = {
     companyId?: string;
     email?: string;
     plan?: string;
+    returnUrl?: string;
   }>;
 };
 
@@ -79,6 +80,9 @@ export default async function SubscribePage({ searchParams }: SubscribePageProps
                 <input type="hidden" name="companyId" value={params.companyId} />
                 <input type="hidden" name="email" value={params.email} />
                 <input type="hidden" name="plan" value={plan} />
+                {params.returnUrl ? (
+                  <input type="hidden" name="returnUrl" value={params.returnUrl} />
+                ) : null}
                 <button
                   type="submit"
                   className="inline-flex w-full items-center justify-center rounded-xl bg-green-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm shadow-green-600/20 transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"

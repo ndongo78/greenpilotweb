@@ -5,6 +5,7 @@ const checkoutSchema = z.object({
   companyId: z.string().uuid(),
   email: z.string().email(),
   plan: z.enum(['solo', 'business']).default('solo'),
+  returnUrl: z.string().url().optional(),
 });
 
 const stripePriceByPlan = {
@@ -12,10 +13,30 @@ const stripePriceByPlan = {
   solo: process.env.STRIPE_PRICE_SOLO,
 } as const;
 
-const appBaseUrl =
-  process.env.NEXT_PUBLIC_APP_BASE_URL?.replace(/\/$/, '') ||
-  process.env.APP_BASE_URL?.replace(/\/$/, '') ||
+const checkoutBaseUrl =
+  process.env.NEXT_PUBLIC_CHECKOUT_BASE_URL?.replace(/\/$/, '') ||
+  process.env.CHECKOUT_BASE_URL?.replace(/\/$/, '') ||
+  'https://greenpilotpro.fr';
+
+const defaultReturnUrl =
+  process.env.NEXT_PUBLIC_WEB_DASHBOARD_URL?.trim() ||
+  process.env.WEB_DASHBOARD_URL?.trim() ||
   'https://www.app.greenpilotpro.fr';
+
+function resolveReturnUrl(value: string | undefined): string {
+  if (!value) {
+    return defaultReturnUrl;
+  }
+  try {
+    const url = new URL(value);
+    if (url.protocol === 'nd-jardins-manager:' || url.protocol === 'https:') {
+      return value;
+    }
+  } catch {
+    return defaultReturnUrl;
+  }
+  return defaultReturnUrl;
+}
 
 function missingConfigResponse(key: string) {
   return NextResponse.json(
@@ -36,6 +57,7 @@ async function parseCheckoutInput(request: Request) {
     companyId: formData.get('companyId'),
     email: formData.get('email'),
     plan: formData.get('plan') || 'solo',
+    returnUrl: formData.get('returnUrl') || undefined,
   });
 }
 
@@ -61,12 +83,15 @@ export async function POST(request: Request) {
     );
   }
 
+  const returnUrl = resolveReturnUrl(parsed.data.returnUrl);
+  const encodedReturnUrl = encodeURIComponent(returnUrl);
+
   const body = new URLSearchParams({
-    cancel_url: `${appBaseUrl}/billing/cancel`,
+    cancel_url: `${checkoutBaseUrl}/billing/cancel?returnUrl=${encodedReturnUrl}`,
     client_reference_id: parsed.data.companyId,
     customer_email: parsed.data.email,
     mode: 'subscription',
-    success_url: `${appBaseUrl}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${checkoutBaseUrl}/billing/success?session_id={CHECKOUT_SESSION_ID}&returnUrl=${encodedReturnUrl}`,
     'line_items[0][price]': priceId,
     'line_items[0][quantity]': '1',
     'metadata[companyId]': parsed.data.companyId,
